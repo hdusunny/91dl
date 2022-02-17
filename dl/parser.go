@@ -109,7 +109,7 @@ func parseVideo(u string) (*video, error) {
 		return nil, err
 	}
 	srcTitle := fmt.Sprintf("[%s] [%s] %s", vNumber, author, title)
-	title = fmt.Sprintf("%s", vNumber, author, title)
+	title = fmt.Sprintf("%s", vNumber)
 	r := strings.NewReplacer("\\", " ", "/", " ", ":", " ", "*", " ", "?", " ", "\"", " ", "<", " ", ">", " ", "|", " ")
 	title = r.Replace(title)
 	srcTitle = r.Replace(srcTitle)
