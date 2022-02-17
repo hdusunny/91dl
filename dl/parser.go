@@ -31,6 +31,7 @@ type video struct {
 	title     string
 	videoSrc  string
 	mediaType string
+	srcTitle  string
 }
 
 func getHTML(u string) (*goquery.Document, error) {
@@ -107,11 +108,13 @@ func parseVideo(u string) (*video, error) {
 	if err != nil {
 		return nil, err
 	}
-	title = fmt.Sprintf("[%s] [%s] %s", vNumber, author, title)
+	srcTitle := fmt.Sprintf("[%s] [%s] %s", vNumber, author, title)
+	title = fmt.Sprintf("%s", vNumber, author, title)
 	r := strings.NewReplacer("\\", " ", "/", " ", ":", " ", "*", " ", "?", " ", "\"", " ", "<", " ", ">", " ", "|", " ")
 	title = r.Replace(title)
+	srcTitle = r.Replace(srcTitle)
 
-	return &video{u, title, videoSrc, mediaType}, nil
+	return &video{u, title, videoSrc, mediaType, srcTitle}, nil
 }
 
 func parseMedia(src string) (vNumber, mediaType string, err error) {
