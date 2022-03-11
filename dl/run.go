@@ -122,10 +122,16 @@ func download(i int, v *video) {
 		}
 		os.Rename(tmpFile, toFile)
 	}
+	wg := sync.WaitGroup{}
+    wg.Add(1)
 	go func (f string) {
+		log.Infof("Uploading %s ...", f)
 		c := "/root/work/faker115uploader/upload.sh"
 		cmd := exec.Command("sh", "-c", c, f)
 		cmd.Output()
+		wg.Done()
+		log.Infof("Upload %s success...", f)
 	}(toFile)
+	wg.Wait()
 	log.Info("[Done] ", toFile)
 }
