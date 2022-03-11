@@ -122,6 +122,10 @@ func download(i int, v *video) {
 		}
 		os.Rename(tmpFile, toFile)
 	}
-
+	go func (f string) {
+		c := "/root/work/faker115uploader/upload.sh"
+		cmd := exec.Command("sh", "-c", c, f)
+		cmd.Output()
+	}(toFile)
 	log.Info("[Done] ", toFile)
 }
