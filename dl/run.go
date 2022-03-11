@@ -17,6 +17,8 @@ package dl
 import (
 	"fmt"
 	"os"
+	"os/exec"
+	"sync"
 	"path/filepath"
 	"time"
 
